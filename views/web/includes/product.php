@@ -11,7 +11,9 @@
                 <div class="overlay-content">
                     <h2><?php echo $product->formatPrice(); ?></h2>
                     <a href="<?php echo url("products/show/{$product->id}") ?>"><p><?php echo $product->name; ?></p></a>
-                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    <form action="<?php echo url("cart/add/{$product->id}")?>" method="POST">
+                        <button type="submit" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    </form>
                 </div>
             </div>
     </div>

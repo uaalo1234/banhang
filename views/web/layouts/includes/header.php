@@ -1,5 +1,6 @@
 <?php require_once('app/Models/Category.php'); ?>
 <?php require_once('core/Auth.php'); ?>
+<?php require_once('app/Models/Cart.php'); ?>
 
 <header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
@@ -70,6 +71,7 @@
 									<li><a href="<?php echo url('authentication/index'); ?>"><i class="fa fa-lock"></i> Login</a></li>
 								<?php else:  ?>
 									<li><?php echo Auth::getUser('user')['name']?></a></li>
+									<a href="<?php echo url('cart/index') ?>">Your cart (<?php echo Cart::countCartItems(); ?>)</a>
 									<a href="<?php echo url('authentication/logout') ?>">Logout</a>
 								<?php endif; ?>
 							</ul>

@@ -4,6 +4,7 @@ require_once('app/Controllers/Web/WebController.php');
 require_once('app/Models/User.php');
 require_once('core/Flash.php');
 require_once('core/Auth.php');
+require_once('app/Models/Cart.php');
 
 class AuthenticationController extends WebController
 {
@@ -50,6 +51,7 @@ class AuthenticationController extends WebController
     public function logout()
     {
         Auth::logout($this->key);
+        Cart::clearCartSession();
         return redirect('homepage/index');
     }
 }

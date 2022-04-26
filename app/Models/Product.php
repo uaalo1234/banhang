@@ -28,4 +28,13 @@ class Product extends Model
         $sql = "SELECT * FROM product_images WHERE product_id = {$this->id}";
         return $this->getAll($sql)->get();
     }
+
+    public function getProductsByIds($itemIds)
+    {
+        $sql = "SELECT * FROM products p INNER JOIN product_images pi 
+        ON p.id = pi.product_id 
+        WHERE p.id IN ($itemIds)";
+        
+        return $this->getAll($sql)->get();
+    }
 }

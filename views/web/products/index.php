@@ -48,7 +48,7 @@
                     <span><?php echo $product->formatPrice(); ?></span>
                     <label>Quantity:</label>
                     <input type="text" value="1">
-                    <form action="<?php echo url('cart/add') ?>" method="POST" style="display: inline;">
+                    <form action="<?php echo url("cart/add/{$product->id}") ?>" method="POST" style="display: inline;">
                         <button type="submit" class="btn btn-fefault cart">
                             <i class="fa fa-shopping-cart"></i>
                             Add to cart
