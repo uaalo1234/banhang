@@ -8,7 +8,7 @@ class Cart
 
     public function __construct()
     {
-        $this->itemIds = $_SESSION['cart'];
+        $this->itemIds = $this->getCartSession();
     }
 
     public function addCartItem($itemId)
@@ -64,7 +64,7 @@ class Cart
 
     public static function getCartSession()
     {
-        return $_SESSION['cart'];
+        return isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
     }
 
     public function applySession()

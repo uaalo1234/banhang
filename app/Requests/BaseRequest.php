@@ -4,7 +4,8 @@ class BaseRequest
 {
     protected $errors = [];
 
-    public function validateStore($data) {}
-
-    public function validateUpdate($data) {}
+    public function getErrors()
+    {
+        return $this->errors;
+    }
 }

@@ -8,7 +8,7 @@ class Authenticated extends BaseMiddleware
     public function handle($parameters)
     {
         if (!Auth::loggedIn('user')) {
-            return redirect('authentication');
+            redirect('authentication');
         }
     }
 }

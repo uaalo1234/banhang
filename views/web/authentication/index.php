@@ -17,7 +17,9 @@
 						
 						<form action="<?php echo url('authentication/login')?>" method="POST">
 							<input type="email" placeholder="Email" name="email">
+							<p class="text-danger"><?php echo isset($loginErrors['email']) ? $loginErrors['email'] : '' ?></p>
 							<input type="password" placeholder="Password" name="password">
+							<p class="text-danger"><?php echo isset($loginErrors['password']) ? $loginErrors['password'] : '' ?></p>
 							<span>
 								<input type="checkbox" class="checkbox" name="remember_me"> 
 								Keep me signed in
@@ -39,8 +41,11 @@
 						<h2>New User Signup!</h2>
 						<form action="<?php echo url('authentication/signup')?>" method="POST">
 							<input type="text" placeholder="Name" name="name">
+							<p class="text-danger"><?php echo isset($registerErrors['name']) ? $registerErrors['name'] : '' ?></p>
 							<input type="email" placeholder="Email Address" name="email">
+							<p class="text-danger"><?php echo isset($registerErrors['email']) ? $registerErrors['email'] : '' ?></p>
 							<input type="password" placeholder="Password" name="password">
+							<p class="text-danger"><?php echo isset($registerErrors['email']) ? $registerErrors['email'] : '' ?></p>
 							<button type="submit" class="btn btn-default">Signup</button>
 						</form>
 					</div><!--/sign up form-->
