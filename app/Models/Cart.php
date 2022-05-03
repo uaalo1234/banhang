@@ -39,7 +39,7 @@ class Cart
 
     public function getCartItems()
     {
-        if (isset($_SESSION['cart'])) 
+        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
         {
             $cartItems = $this->getCartSession();
             $cartItemsId = implode(",", array_keys($cartItems));

@@ -29,7 +29,6 @@ class Model
     /**
      * Find where with multiple condition
      *
-     * @return this
      */
     public function where($wheres = [])
     {   

@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
+                        <?php 
                         $sum = 0;
                         foreach($cartItems as $key => $cartItem): ?>
                             <tr data-id="27">
@@ -66,7 +66,6 @@
                                     <p class="cart_total_price"><?php echo number_format($cartItemTotalPrice, 0, ".", ",") ?> đ</p>
                                 </td>
                                 <td>
-                                    <button name="update" class="btn btn-success btn-sm remove-from-cart" type="submit">Update</button>
                                     <button name="delete" class="btn btn-danger btn-sm remove-from-cart" type="submit">Delete</button>
                                 </td>
                                 </form>
@@ -80,7 +79,7 @@
                         <tr>
                             <td colspan="5" class="text-right">
                                 <a href="<?php echo url('homepage/index'); ?>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục xem...</a>
-                                <a class="btn btn-success" href="http://php0621e-5.itpsoft.com.vn/checkout">Đặt hàng</a>
+                                <a class="btn btn-success" href="<?php echo url('checkout') ?>">Đặt hàng</a>
                             </td>
                         </tr>
                     </tfoot>

@@ -15,18 +15,20 @@ class CartController extends WebController
 
     public function add()
     {
-        $this->middleware('Authenticated');
-        $id = $_GET['id'];
-        // print_r($id);die();
-        $this->cart->addCartItem($id);
-        return redirect('cart/index');
+        if ($this->middleware('Authenticated')) {
+            // print_r('123');die();
+            $id = $_GET['id'];
+            $this->cart->addCartItem($id);
+            return redirect('cart/index');
+        }
     }
 
     public function index()
     {
-        $this->middleware('Authenticated');
-        $cartItems = $this->cart->getCartItems();
-        return $this->view('cart/index.php', ['cartItems' => $cartItems]);
+        if ($this->middleware('Authenticated')) {
+            $cartItems = $this->cart->getCartItems();
+            return $this->view('cart/index.php', ['cartItems' => $cartItems]);
+        }    
     }
 
     public function modify()

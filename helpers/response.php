@@ -17,18 +17,6 @@ function back()
 }
 
 /**
- * Ajax request
- */
-
-function ajax($data, $status = 200) {
-    echo [
-        'status' => $status,
-        'data' => $data
-    ];
-}
-
-
-/**
  * Render content to view
  *
  * @param [type] $view
