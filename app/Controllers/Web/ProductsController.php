@@ -16,6 +16,6 @@ class ProductsController extends WebController
         $id = $_GET['id'];
 
         $product = $this->product->find($id)->hydrate();
-        return $this->view('products/index.php', ['product' => $product]);
+        return $this->view('products/show.php', ['product' => $product]);
     }
 }

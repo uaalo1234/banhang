@@ -1,13 +1,11 @@
 <?php
 
-require('app/models/User.php');
-require('core/Flash.php');
-require('app/Requests/UserRequest.php');
+require_once('app/Models/User.php');
+require_once('core/Flash.php');
+require_once('app/Requests/UserRequest.php');
 
 class UserController extends Controller
 {
-    protected $layout = 'admin/layouts/index.php';
-
     protected $user;
 
     public function __construct()

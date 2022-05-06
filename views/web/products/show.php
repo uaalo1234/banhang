@@ -1,4 +1,4 @@
-<?php include('views/web/layouts/index.php') ?>
+<?php include_once('views/web/layouts/index.php') ?>
 
 <?php startblock('slider') ?>
     <?php include('views/web/includes/slider.php') ?>

@@ -8,4 +8,9 @@ class BaseRequest
     {
         return $this->errors;
     }
+
+    public function countErrors()
+    {
+        return count($this->errors);
+    }
 }

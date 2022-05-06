@@ -27,7 +27,8 @@ class AuthenticationController extends WebController
     {
         $authenticationRequest = new AuthenticationRequest();
         $authenticationRequest->validateLogin($_POST);
-        if (count($authenticationRequest->getErrors()) == 0) {
+
+        if ($authenticationRequest->countErrors() == 0) {
             $loggedUser = $this->user->where(['email' => $_POST['email'], 'password' => md5($_POST['password'])])->first();
             if ($loggedUser) {
                 isset($_POST['remember_me']) ? Auth::setUser($this->key, $loggedUser, true) : Auth::setUser($this->key, $loggedUser);
@@ -44,14 +45,14 @@ class AuthenticationController extends WebController
     {
         $authenticationRequest = new AuthenticationRequest();
         $authenticationRequest->validateRegister($_POST);
-        if (count($authenticationRequest->getErrors()) == 0) {
+        if ($authenticationRequest->countErrors() == 0) {
             $user = new User();
             $foundUser = $this->user->where(['email' => $_POST['email']])->get();
             if (count($foundUser) == 0) {
                 $_POST['password'] = md5($_POST['password']);
                 $isCreated = $user->create($_POST);
                 if ($isCreated) {
-                    return redirect('homepage/index');
+                    return back();
                 }
             }
             Flash::set('signup_error', 'Email exist');
