@@ -1,79 +1,59 @@
-<?php 
+<?php
+require_once('./core/Database.php');
+require_once('app/Models/Model.php');
 
-require_once('app/Models/Product.php');
 
-class Cart 
-{
-    protected $itemIds;
+class Cart extends Model{
 
-    public function __construct()
+    protected $table = 'cart';
+
+    protected $fillable = ['id','productId','quantity','size'];
+
+    public function show_cart(){ 
+
+        $sql = "SELECT cart.id,cart.size,cart.quantity,productId,product.productName,product.price,product.thumbnail,product.description,product.discount  
+        FROM cart INNER JOIN product ON cart.productId = product.id";
+        return $this->getAll($sql);
+    }
+    public function show($id){
+
+
+        $sql = "SELECT cart.id,cart.quantity,product.id,product.productName,product.price,product.thumbnail,product.description,product.types 
+        FROM cart INNER JOIN product ON cart.productId = product.id WHERE cart.id = $id";
+   
+        return $this->getAll($sql);
+    }
+    public function delete_cart($id){
+        $sql = "DELETE FROM cart WHERE id = $id";
+        // print_r($sql);die();    
+        $result = $this->dbConnection->query($sql);
+        return $result;
+    }
+    public function update($id,$quantity)
     {
-        $this->itemIds = $this->getCartSession();
+        $sql = "UPDATE cart SET quantity = $quantity WHERE id = $id ";
+
+        // print_r($sql);die();
+       $result = $this->dbConnection->query($sql);
+        return $result;
     }
 
-    public function addCartItem($itemId)
-    {
-        if (!isset($this->itemIds[$itemId])) {
-            $this->itemIds[$itemId] = ['cart_quantity' => 1];
-        }
-        else {
-            $quantity = $this->itemIds[$itemId]['cart_quantity'] + 1;
-            $this->itemIds[$itemId] = ['cart_quantity' => $quantity];
-        }
-        $this->applySession();
+    public function delete_cart_detail($id){
+        $sql = "DELETE FROM cart WHERE id = $id";
+        // print_r($sql);die();    
+        $result = $this->dbConnection->query($sql);
+        return $result;
     }
+    // public function insert_cart($productId,$quantity,$size){ 
+    //     $sql = "INSERT INTO cart(productId,quantity,size) VALUES ('$productId','$quantity','$size')";
+    //     return $this->dbConnection->query($sql);
+    // }
 
-    public function updateCartItem($itemId, $quantity)
-    {
-        if (isset($this->itemIds[$itemId])) {
-            $this->itemIds[$itemId]['cart_quantity'] = $quantity;
-        }
-        $this->applySession();
-    }
-
-    public function deleteCartItem($itemId)
-    {
-        unset($this->itemIds[$itemId]);
-        $this->applySession();
-    }
-
-    public function getCartItems()
-    {
-        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
-        {
-            $cartItems = $this->getCartSession();
-            $cartItemsId = implode(",", array_keys($cartItems));
-            $product = new Product();
-            $products = $product->getProductsByIds($cartItemsId);
-            foreach ($products as $key => $product) {
-                $productId = $product['product_id'];
-                $products[$productId]['cart_quantity'] = $cartItems[$productId]['cart_quantity'];
-                $this->itemIds[$productId]['product'] = $product;
-                $this->itemIds[$productId]['cart_quantity'] = $cartItems[$productId]['cart_quantity'];
-            }
-
-            return $this->itemIds;
-        }
-        return [];
-    }
-
-    public static function countCartItems()
-    {
-        return count(self::getCartSession());
-    }
-
-    public static function getCartSession()
-    {
-        return isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-    }
-
-    public function applySession()
-    {
-        $_SESSION['cart'] = $this->itemIds;
-    }
-
-    public static function clearCartSession()
-    {
-        unset($_SESSION['cart']);
+    public function add_cart($product_id,$qty,$sel_size){
+       
+        $sql = "INSERT INTO cart(productId,quantity,size) VALUES ('$product_id','$qty','$sel_size')";
+        // print_r($sql);die();
+        $result = $this->dbConnection->query($sql);
+        return $result;
     }
 }

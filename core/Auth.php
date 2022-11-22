@@ -5,7 +5,7 @@ class Auth
     public static function setUser($key, $user, $useCookies = false)
     {
         if ($useCookies) {
-            setcookie($key, serialize($user), time() + 3600, '/');
+            setcookie($key, serialize($user), time() + 1000000, '/');
         }
         else {
             $_SESSION[$key] = $user;

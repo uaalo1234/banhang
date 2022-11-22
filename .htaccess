@@ -5,9 +5,12 @@ RewriteEngine on
 
 RewriteRule ^public - [L]
 
+RewriteRule ^admin/([^/]+)/([^/]+)/([1-9][0-9]*) index.php?controller=$1&action=$2&id=$3&module=admin [L,QSA]
+
 RewriteRule ^admin/([^/]+)/([^/]+) index.php?controller=$1&action=$2&module=admin [L,QSA]
 
 RewriteRule ^admin/([^/]+) index.php?controller=$1&action=index&module=admin [L,QSA]
+
 
 RewriteRule ^([^/]+)/([^/]+)/([1-9][0-9]*) index.php?controller=$1&action=$2&id=$3&module=web [L,QSA]
 
